@@ -27,10 +27,10 @@ class Arena {
     this.message = "";
 
     const directions = {
-      N: {x:-1, y:0},
-      E: {x:0 , y:1},
-      S: {x:1 , y:0},
-      W: {x:0 , y:-1}
+      N: {x:0,  y:-1},
+      E: {x:-1, y:0},
+      S: {x:0 , y:1},
+      W: {x:1 , y:0}
     }
 
     const expectedTile = {
