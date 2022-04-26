@@ -3,7 +3,7 @@
  * in the DOM where root is defined
  * @param {string} root (# dans le HTML)
  */
-class TemplateRoot {
+ class TemplateRoot {
   constructor(root) {
     this.rootElement = document.getElementById(root);
   }
@@ -112,16 +112,18 @@ class ArenaTemplate extends TemplateRoot {
     return img;
   }
 
+  // Build Hero Image
   makeHeroImage(arena) {
-    return `<img title="${arena.hero.name}, portée de ${arena.hero.getRange ? arena.hero.getRange() : ""}" alt="${arena.hero.name}" src="${arena.hero.image}" >`
+    return `<img title="${arena.hero.name}, portée de ${arena.hero.getRange ? arena.hero.getRange() : ""}" alt="${arena.hero.name}" src="${arena.hero.image}" >`;
   }
 
+  // Build Monster Image
   makeMonsterImage(arena, monster) {
     return `<img
       title="Distance to ${arena.hero.name} ${arena.getDistance ? arena.getDistance(monster, arena.hero) : ""}"
       alt="${monster.name}" src="${monster.image}"
       class="monster ${arena.isTouchable ? (arena.isTouchable(arena.hero, monster) ? 'touchable' : 'untouchable') : ""}"
-    >`
+    >`;
   }
 
   createArena(arena) {
@@ -140,15 +142,17 @@ class ArenaTemplate extends TemplateRoot {
     this.render(arenaTemplate)
   }
 
+  // Manage image display of moving fighters
   setFightersPosition(arena, old){
-    document.getElementById(`pos${old.x}${old.y}`).innerHTML = ""
-    document.getElementById(`pos${arena.hero.x}${arena.hero.y}`).innerHTML = this.makeHeroImage(arena)
+    document.getElementById(`pos${old.x}${old.y}`).innerHTML = "";
+    document.getElementById(`pos${arena.hero.x}${arena.hero.y}`).innerHTML = this.makeHeroImage(arena);
 
     arena.monsters.forEach(monster => {
-      document.getElementById(`pos${monster.x}${monster.y}`).innerHTML = this.makeMonsterImage(arena, monster)
-    })
+      document.getElementById(`pos${monster.x}${monster.y}`).innerHTML = this.makeMonsterImage(arena, monster);
+    });
   }
 
+  // Keyboard events managment
   setMoveEvent(arena) {
     document.addEventListener('keydown', (event) => {
       const keyName = event.key;
@@ -157,8 +161,8 @@ class ArenaTemplate extends TemplateRoot {
       if (keyName in directions) {
           event.preventDefault();
 
-          const old = arena.move(directions[keyName])
-          this.setFightersPosition(arena, old)
+          const old = arena.move(directions[keyName]);
+          this.setFightersPosition(arena, old);
       }
     });
   }
