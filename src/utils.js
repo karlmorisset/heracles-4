@@ -167,4 +167,3 @@ class ArenaTemplate extends TemplateRoot {
     });
   }
 }
-
